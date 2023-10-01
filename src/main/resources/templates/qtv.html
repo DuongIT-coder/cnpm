@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/static/css/normalize.css">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="stylesheet" href="/static/css/base.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+          href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700&display=swap"
+          rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+  <title>Quản trị viên</title>
+</head>
+
+<body>
+<header>
+  <div style="padding-left: 20px;">
+    <p style="font-size: 25px;font-weight: 700;line-height: 60px;">GIAO DIỆN CHO SINH VIÊN</p>
+  </div>
+  <a href="login.html" style="padding-right: 20px;" id="logout_button">
+    <div style="transform: translate(-10px, 4px);"><img id="logout_icon_1"
+                                                        src="/static/img/switch-sever-border.png" alt="">
+      <img id="logout_icon_2" src="/static/img/swittchsever-btn.png" alt="">
+    </div>
+    <p style="font-size: 25px; font-weight: 700; line-height: 60px;">ĐĂNG XUẤT</p>
+  </a>
+</header>
+<div style="display: flex; justify-content: center; margin-top: 60px;">
+  <button id="create_tablepoint" class="btn">Tạo bảng điểm</button>
+  <button id="adj_tablepoint" class="btn">Chỉnh sửa</button>
+</div>
+<form class="unavailable" name="choose_sub" action="" style="padding: 0 100px; margin: 20px 0;">
+  <select class="inline-block" name="subject">
+    <option class="opt_subj" value="CHP">Chọn học phần</option>
+    <option class="opt_subj" value="CNPM">Công nghệ phần mềm</option>
+    <option class="opt_subj" value="CNJA">Công nghệ Java</option>
+    <option class="opt_subj" value="TRR">Toán rời rạc</option>
+  </select>
+</form>
+<form action="" name="classCNPM" class="unavailable" id="choose_class_cnpm" style="width: 100%; padding: 0 100px; margin: 20px 0;">
+  <select
+          class="inline-block" name="subj">
+    <option class="opt_subj" value="CLHP">Chọn lớp học phần</option>
+    <option class="opt_subj" value="CNPM21cn3">21CN3</option>
+    <option class="opt_subj" value="CNPM21cn1">21CN1</option>
+    <option class="opt_subj" value="CNPM20cn1">20CN1</option>
+  </select>
+</form>
+<form action="" name="classCNJA" class="unavailable" id="choose_class_cnja" style="width: 100%; padding: 0 100px; margin: 20px 0;"><select
+        class="inline-block" name="subj">
+  <option class="opt_subj" value="CLHP">Chọn lớp học phần</option>
+  <option class="opt_subj" value="CNJA21cn3">21CN3</option>
+  <option class="opt_subj" value="CNJA21cn1">21CN1</option>
+  <option class="opt_subj" value="CNJA20cn1">20CN1</option>
+</select></form>
+<form action="" name="classTRR" class="unavailable" id="choose_class_trr" style="width: 100%; padding: 0 100px; margin: 20px 0;"><select
+        class="inline-block" name="subj">
+  <option class="opt_subj" value="CLHP">Chọn lớp học phần</option>
+  <option class="opt_subj" value="TRR21cn3">21CN3</option>
+  <option class="opt_subj" value="TRR21cn1">21CN1</option>
+  <option class="opt_subj" value="TRR20cn1">20CN1</option>
+</select></form>
+<div style="display: flex; justify-content: center">
+  <button style="width: 100%;" id="import_data_class" class="btn unavailable">Nhập dữ liệu</button>
+</div>
+<form action="" name="teacherforclass" class="unavailable" id="choose_teacher" style="width: 100%; padding: 0 100px; margin: 20px 0;"><select
+        class="inline-block" name="subj">
+  <option class="opt_subj" value="CGV">Chọn giảng viên phụ trách</option>
+  <option class="opt_subj" value="NA">Nguyễn A</option>
+  <option class="opt_subj" value="PB">Phạm B</option>
+  <option class="opt_subj" value="DC">Đinh C</option>
+</select></form>
+
+
+<div style="float: right; margin-right: 30px;">
+  <button id="cancel_tablepoint" class="btn unavailable">Hủy bảng điểm</button>
+  <button id="save_sent" class="btn">Lưu và chuyển tiếp bảng điểm</button>
+</div>
+
+<script>
+  const createTablepoint = document.getElementById('create_tablepoint')
+  const cancelTablepoint = document.getElementById('cancel_tablepoint')
+  const importData = document.getElementById('import_data_class')
+  const classCNPM = document.getElementById('choose_class_cnpm')
+  const classCNJA = document.getElementById('choose_class_cnja')
+  const classTRR = document.getElementById('choose_class_trr')
+  const chooseTeacher = document.getElementById('choose_teacher')
+
+  createTablepoint.addEventListener('click', function(){
+    form1.classList.remove('unavailable')
+    form1.classList.add('block')
+    cancelTablepoint.classList.remove('unavailable')
+  })
+  cancelTablepoint.addEventListener('click', function(){
+    form1.classList.add('unavailable')
+    form1.classList.remove('block')
+    classCNPM.classList.remove('inline-block')
+    classCNPM.classList.add('unavailable')
+    classCNJA.classList.remove('inline-block')
+    classCNJA.classList.add('unavailable')
+    classTRR.classList.remove('inline-block')
+    classTRR.classList.add('unavailable')
+    cancelTablepoint.classList.add('unavailable')
+    importData.classList.add('unavailable')
+    chooseTeacher.classList.add('unavailable')
+    chooseTeacher.classList.remove('block')
+  })
+  let form1 = document.forms['choose_sub'];
+  let menu1 = form1.subject;
+  let option1 = form1.subject.options;
+  menu1.onchange = function () {
+    let optionValue = this.value;
+    if (optionValue == "CNPM") {
+      classCNPM.classList.remove('unavailable')
+      classCNPM.classList.add('inline-block')
+      classCNJA.classList.remove('inline-block')
+      classCNJA.classList.add('unavailable')
+      classTRR.classList.remove('inline-block')
+      classTRR.classList.add('unavailable')
+    }
+    if (optionValue == "CNJA") {
+      classCNPM.classList.remove('inline-block')
+      classCNPM.classList.add('unavailable')
+      classCNJA.classList.remove('unavailable')
+      classCNJA.classList.add('inline-block')
+      classTRR.classList.remove('inline-block')
+      classTRR.classList.add('unavailable')
+    }
+    if (optionValue == "TRR") {
+      classCNPM.classList.remove('unavailable')
+      classCNPM.classList.add('inline-block')
+      classCNJA.classList.remove('inline-block')
+      classCNJA.classList.add('unavailable')
+      classTRR.classList.remove('inline-block')
+      classTRR.classList.add('unavailable')
+    }
+    if (optionValue == "CHP") {
+      classCNPM.classList.remove('inline-block')
+      classCNPM.classList.add('unavailable')
+      classCNJA.classList.remove('inline-block')
+      classCNJA.classList.add('unavailable')
+      classTRR.classList.remove('inline-block')
+      classTRR.classList.add('unavailable')
+      importData.classList.add('unavailable')
+      chooseTeacher.classList.add('unavailable')
+      chooseTeacher.classList.remove('block')
+    }
+  }
+
+  let formcnpm = document.forms['classCNPM'];
+  let menucnpm = formcnpm.subj;
+  let optioncnpm = formcnpm.subj.options;
+  menucnpm.onchange = function () {
+    let optionValue = this.value;
+    if (optionValue == "CNPM21cn3") {
+      importData.classList.remove('unavailable')
+    }
+    if (optionValue == "CNPM21cn1") {
+      importData.classList.remove('unavailable')
+    }
+    if (optionValue == "CNPM20cn1") {
+      importData.classList.remove('unavailable')
+    }
+    if (optionValue == "CLHP") {
+      importData.classList.add('unavailable')
+      chooseTeacher.classList.add('unavailable')
+      chooseTeacher.classList.remove('block')
+    }
+  }
+
+  let formcnja = document.forms['classCNJA'];
+  let menucnja = formcnja.subj;
+  let optioncnja = formcnja.subj.options;
+  menucnja.onchange = function () {
+    let optionValue = this.value;
+    if (optionValue == "CNJA21cn3") {
+      importData.classList.remove('unavailable')
+    }
+    if (optionValue == "CNJA21cn1") {
+      importData.classList.remove('unavailable')
+    }
+    if (optionValue == "CNJA20cn1") {
+      importData.classList.remove('unavailable')
+    }
+    if (optionValue == "CLHP") {
+      importData.classList.add('unavailable')
+      chooseTeacher.classList.add('unavailable')
+      chooseTeacher.classList.remove('block')
+    }
+  }
+  let formtrr = document.forms['classTRR'];
+  let menutrr = formtrr.subj;
+  let optiontrr = formtrr.subj.options;
+  menutrr.onchange = function () {
+    let optionValue = this.value;
+    if (optionValue == "TRR21cn3") {
+      importData.classList.remove('unavailable')
+    }
+    if (optionValue == "TRR21cn1") {
+      importData.classList.remove('unavailable')
+    }
+    if (optionValue == "TRR20cn1") {
+      importData.classList.remove('unavailable')
+    }
+    if (optionValue == "CLHP") {
+      importData.classList.add('unavailable')
+      chooseTeacher.classList.add('unavailable')
+      chooseTeacher.classList.remove('block')
+    }
+  }
+  importData.addEventListener('click', function() {
+    chooseTeacher.classList.remove('unavailable')
+    chooseTeacher.classList.add('block')
+  })
+</script>
+</body>
+
+</html>

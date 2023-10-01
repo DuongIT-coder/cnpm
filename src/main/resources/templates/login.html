@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/normalize.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700&display=swap" rel="stylesheet">
+    <title>Quản lý điểm</title>
+</head>
+<body>
+<div id="login_screen">
+    <div id="display_login">
+        <p id="title_login">Hệ thống quản lý điểm</p>
+        <div id="choose_user">
+            <select name="user" id="name_users">
+                <option class="opt_user" value="QTV">Quản trị viên</option>
+                <option class="opt_user" value="SV">Sinh Viên</option>
+                <option class="opt_user" value="GV">Giảng viên</option>
+            </select>
+            <div>
+            <form name="form_user"  th:action="@{/login}" method="post" th:object="${student}">
+                <label for="email">Tên đăng nhập</label>
+                <input type="text" th:field="*{masinhvien}" name="email" id="email">
+                <label for="password">Mật khẩu</label>
+                <input type="password" th:field="*{password}" name="email" id="password">
+                <button id="submit-sv" class="unavailable submit" >Đăng Nhập</button>
+            </form>
+            </div>
+            <form name="form_user"  th:action="@{/login}" method="post" th:object="${student}">
+                <label for="email">Tên đăng nhập</label>
+                <input type="text" th:field="*{masinhvien}" name="email" id="email">
+                <label for="password">Mật khẩu</label>
+                <input type="password" th:field="*{password}" name="email" id="password">
+                <button id="submit-gv" class="unavailable submit" >Đăng Nhập</button>
+            </form>
+            <form name="form_user" th:action="@{/login}" method="post" th:object="${student}">
+                <label for="email">Tên đăng nhập</label>
+                <input type="text" th:field="*{masinhvien}" name="email" id="email">
+                <label for="password">Mật khẩu</label>
+                <input type="password" th:field="*{password}" name="email" id="password">
+                <button id="submit-qtv" class="unavailable submit" >Đăng Nhập</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    const qtv = document.querySelector("#submit-qtv");
+    const sv = document.querySelector("#submit-sv");
+    const gv = document.querySelector("#submit-gv");
+    let form0 = document.forms['form_user'];
+    let menu0 = form0.user;
+    let option0 = form0.user.options;
+
+    menu0.onchange = function(){
+        let optionValue = this.value;
+        if (optionValue == "SV") {
+            sv.classList.remove('unavailable')
+            qtv.classList.remove('inline-block')
+            sv.classList.add('inline-block')
+            qtv.classList.add('unavailable')
+            gv.classList.remove('inline-block')
+            gv.classList.add('unavailable')
+        }
+        if (optionValue == "GV") {
+            gv.classList.remove('unavailable')
+            qtv.classList.remove('inline-block')
+            gv.classList.add('inline-block')
+            qtv.classList.add('unavailable')
+            sv.classList.remove('inline-block')
+            sv.classList.add('unavailable')
+        }
+        if (optionValue == "QTV") {
+            qtv.classList.remove('unavailable')
+            gv.classList.remove('inline-block')
+            qtv.classList.add('inline-block')
+            gv.classList.add('unavailable')
+            sv.classList.remove('inline-block')
+            sv.classList.add('unavailable')
+        }
+    }
+</script>
+</body>
+</html>
